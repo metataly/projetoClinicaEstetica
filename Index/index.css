@@ -1,0 +1,59 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  background-image: url("../imagens/telainicial2.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+header {
+  height: 35vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+header img {
+  width: 25vw;
+  margin-left: 2vw;
+}
+header h3 {
+  margin-left: 3vw;
+  color: #24FF00;
+}
+
+main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 67vh;
+  padding: 5vw;
+}
+main div {
+  width: 40vw;
+  text-align: justify;
+  background-color: rgba(36, 255, 0, 0.3);
+  border-radius: 15px;
+  color: white;
+}
+main div p {
+  padding: 3vw;
+  font-size: 1.1em;
+}
+main button {
+  border: 1px solid rgb(45, 129, 93);
+  border-radius: 10px;
+  background-color: rgba(45, 129, 93, 0.5);
+  padding: 1vw 4vw;
+  cursor: pointer;
+  color: white;
+}
+main button:hover {
+  background-color: rgb(45, 129, 93);
+}/*# sourceMappingURL=Index.css.map */
