@@ -26,6 +26,8 @@ header img {
 header h3 {
   margin-left: 3vw;
   color: #24FF00;
+  font-family: Pattaya;
+  font-weight: lighter;
 }
 
 main {
@@ -33,7 +35,8 @@ main {
   justify-content: space-between;
   align-items: flex-end;
   height: 67vh;
-  padding: 5vw;
+  padding: 2vw;
+  font-family: Inter;
 }
 main div {
   width: 40vw;
