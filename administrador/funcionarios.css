@@ -1,0 +1,140 @@
+/* Reset */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body 
+{
+    font-family: 'Inter', Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* Cabeçalho */
+header 
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #fff;
+    height: 100px;
+    margin-bottom: 40px;
+    border-bottom: 1.5px solid #09613B;
+}
+
+header img 
+{
+    height: 70px;
+    margin: 0 auto;
+}
+
+header button 
+{
+    border: none;
+    background: #2D815D;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+header button:hover 
+{
+    background: #09613B;
+}
+
+/* Título Funcionários */
+.afastar 
+{
+    font-size: 34px;
+    font-weight: bold;
+    margin: 30px 0 20px 40px;
+}
+
+/* Sessão de Funcionários */
+.funcionario 
+{
+    display: flex;
+    align-items: center;
+    background: #fff;
+    margin: 15px 3%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 2px solid #2D815D;
+}
+
+.funcionario img 
+{
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.infoFuncionario 
+{
+    flex: 1;
+}
+
+.infoFuncionario p 
+{
+    margin-bottom: 10px;
+}
+
+.divisor 
+{
+    height: 2px;
+    background: #2D815D;
+    margin: 10px 0;
+}
+
+.verEscala 
+{
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 1px solid #2D815D;
+    border-radius: 10px;
+    background-color: transparent;
+    color: #2D815D;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.verEscala:hover 
+{
+    background-color: #2D815D;
+    color: white;
+}
+
+/* Botão Editar */
+.actions 
+{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.editButton 
+{
+    padding: 10px 20px;
+    font-size: 25px;
+    border: none;
+    border-radius: 20px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.adicionar 
+{
+    background-color: #2D815D;
+    color: #fff;
+}
+
+.adicionar:hover 
+{
+    background-color: #09613B;
+}

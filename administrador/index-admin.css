@@ -1,0 +1,270 @@
+/* Reset */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body 
+{
+    font-family: 'Inter', sans-serif;
+    background-color: #ffffff;
+    color: #333;
+}
+
+/* Cabeçalho */
+header 
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.separator 
+{
+    height: 2px;
+    background: #2D815D;
+    width: 100%;
+    margin-top: 5px;
+}
+.welcome-text 
+{
+    text-align: right; 
+    font-size: 24px; 
+    color: #333; 
+    width: 100%; 
+    
+}
+.visao 
+{
+    text-align: center; 
+    font-size: 12px; 
+    color: #333; 
+    width: 100%; 
+}
+/* Conteúdo Principal */
+main 
+{
+    padding: 20px;
+}
+
+/* Mensagem de boas-vindas */
+.welcome p:first-child 
+{
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.welcome p:last-child {
+    margin-top: 5px;
+    color: #666;
+}
+
+/* Seção de Serviços */
+.services 
+{
+    margin-top: 50px;
+}
+
+.services h2 
+{
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.service 
+{
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1.5px solid #09613B;
+}
+
+.service img
+{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+.service div 
+{
+    flex: 1;
+}
+
+.service .details 
+{
+    color: #2D815D;
+    text-decoration: none;
+}
+
+.service .details:hover 
+{
+    text-decoration: underline;
+}
+
+.service button.view 
+{
+    background: #fff;
+    color: #09613B;
+    border: 2px solid #09613B;
+    padding: 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 12.5%;
+}
+
+.service button.view:hover 
+{
+    background: #09613B;
+    color: #fff;
+    border: 2px solid #000;
+}
+
+.addService 
+{
+    margin: 0 auto;
+    display: block;
+    width: 20%;
+    background: #fff;
+    color: #09613B;
+    border: 2px solid  #09613B;
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.addService:hover {
+    background: #09613B;
+    color: #fff;
+    border: 2px solid #000;
+}
+
+/* Seção de Funcionários */
+/* Linha divisora */
+.divisor
+{
+    height: 1px;
+    background-color: #ccc;
+    margin: 20px 0;
+    border: none;
+}
+
+/*Membros do Pessoal */
+.equipe
+{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.equipe h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* Grid para os membros do pessoal */
+.gridEquipe
+{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    margin-top: 20px;
+}
+
+.membroEquipe 
+{
+    text-align: center;
+    background: #fff;
+}
+
+.membroEquipe img 
+{
+    height: 100px;
+    width: auto;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.nomeFuncionario {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 0px;
+}
+
+.membroEquipe a.details 
+{
+    color: #2D815D;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.membroEquipe a.details:hover 
+{
+    text-decoration: underline;
+    color: #09613B;
+}
+/* Footer */
+footer 
+{
+    padding: 20px;
+    background-color: #2D815D;
+    color: white;
+}
+
+.tabelaFooter 
+{
+    width: 100%;
+    border-spacing: 20px;
+    table-layout: fixed;
+}
+
+.tabelaFooter th, td 
+{
+    vertical-align: top;
+    text-align: left;
+}
+
+.tabelaFooter th 
+{
+    font-size: 1.5em;
+    padding-bottom: 15px;
+}
+
+.textoFooter 
+{
+    background-color: rgba(36, 255, 0, 0.3);
+    border-radius: 15px;
+    padding: 20px;
+    font-size: 18px;
+    text-align: justify;
+}
+
+.horario 
+{
+    font-size: 18px;
+    text-align: center;
+}
+
+.horario ul 
+{
+    list-style: none;
+    padding: 0;
+}
+
+.horario li 
+{
+    margin-bottom: 5px;
+}
