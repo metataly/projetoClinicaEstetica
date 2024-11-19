@@ -10,60 +10,156 @@
     <title>Harmony Beauty | Home</title>
     
 </head>
-<body>
+<body id = "conteudo">
     <header>
-        <button>☰</button>
+        <button id = "menu">☰</button>
+      <div id = "barra">
+        <h2>Perfil</h2>
+       
+        <div id="perfil">
+          <img src="../../imagens/perfil.png" >
+          <div>
+            <p>Usuário</p>
+            <p>Usuário@gmail.com</p>
+          </div>
+        </div>
+        
+        <ul>
+          <li>PERFIL</li>
+          <li>AGENDAMENTOS</li>
+          <li><a href="../../Login/login.html">MUDAR CONTA</a></li>
+          <li><a href="../../Index/index.html">SAIR</a></li>
+        </ul>
+    </div>
      <nav>
         <img src="../../imagens/harmonyBeauty.png" alt="Logomarca harmonyBeauty">
         <ul>
-            <li>Horários</li>
-            <li>Especialistas</li>
-            <li>Sobre Nós</li>
+            <li><a href="#ho">Horários</a></li>
+            <li><a href="#esp">Especialistas</a></li>
+            <li><a href="#ho">Sobre Nós</a></li>
         </ul>
      </nav>
     </header>
     <main>
       <h2>Serviços</h2>
       <section>
-        <div>
+        <div class ="itens">
             <img src="../../imagens/agendamento.png" alt="Imagem de agendamento">
-            <div>
+            <div class = "info">
                 <h3>Preenchimento Facial</h3>
-                <a href="http://">Mostrar detalhes →</a>
+                <a href="#">Mostrar detalhes →</a>
             </div>
-            <button> RESERVAR </button>
         </div>
+        <button> RESERVAR </button>
       </section>
-
+      <section>
+        <div class ="itens">
+            <img src="../../imagens/agendamento.png" alt="Imagem de agendamento">
+            <div class = "info">
+                <h3>Preenchimento Facial</h3>
+                <a href="#">Mostrar detalhes →</a>
+            </div>
+        </div>
+        <button> RESERVAR </button>
+      </section>
+      <section>
+        <div class ="itens">
+            <img src="../../imagens/agendamento.png" alt="Imagem de agendamento">
+            <div class = "info">
+                <h3>Preenchimento Facial</h3>
+                <a href="#">Mostrar detalhes →</a>
+            </div>
+        </div>
+        <button> RESERVAR </button>
+      </section>
+      <section>
+        <div class ="itens">
+            <img src="../../imagens/agendamento.png" alt="Imagem de agendamento">
+            <div class = "info">
+                <h3>Preenchimento Facial</h3>
+                <a href="#">Mostrar detalhes →</a>
+            </div>
+        </div>
+        <button> RESERVAR </button>
+      </section>
       <button>Criar Pacote</button>
-      <hr>
-
-      <section>
-        <h2>Nossos Especialistas</h2>
+      <br><br>
+      <h2 id ="esp">Nossos Especialistas</h2>
+      <section class="funcionario">
         <div>
-            <img src="" alt="">
-            <h4>Nome</h4>
-            <a href="http://">Mostrar detalhes →</a>
+            <img src="../../imagens/perfil.png" alt="">
+            <h4>Fulano de tal</h4>
+            <a href="#">Mostrar detalhes →</a>
+        </div>
+        <div>
+          <img src="../../imagens/perfil.png" alt="">
+          <h4>Fulano de tal</h4>
+          <a href="#">Mostrar detalhes →</a>
+        </div>
+        <div>
+          <img src="../../imagens/perfil.png" alt="">
+          <h4>Fulano de tal</h4>
+          <a href="#">Mostrar detalhes →</a>
+        </div>
+        <div>
+          <img src="../../imagens/perfil.png" alt="">
+          <h4>Fulano de tal</h4>
+          <a href="#">Mostrar detalhes →</a>
         </div>
       </section>
-
-      <section>
-        <h2>Sobre Nós</h2>
-        <div>
-            <p>blabla bla</p>
-        </div>
-      </section>
-
-      <section>
-        <h2>Horários de Funcionamento</h2>
-
-        <div>
-            <p>blablabka</p>
-        </div>
+      <br><br>
       </section>
     </main>
-    <footer>
-
+     <footer id = "ho">
+        <table class="tabelaFooter">
+            <tr>
+                <!-- Título Sobre Nós -->
+                <th>
+                    <h2 style="text-align: center;">Sobre nós</h2>
+                </th>
+                <!-- Título Horário de Funcionamento -->
+                <th>
+                    <h2 style="text-align: center;">Horário de Funcionamento</h2>
+                </th>
+            </tr>
+            <tr>
+                <!-- Texto Sobre Nós -->
+                <td>
+                    <div class="textoFooter">
+                        <p>
+                            Bem-vindo ao nosso espaço dedicado à sua beleza. Especializados em preenchimento facial,
+                            limpeza de pele, depilação, podologia e tratamento de rugas, oferecemos uma experiência
+                            excepcional. Acreditamos na beleza como uma jornada pessoal, guiando-o com expertise.
+                            Além da excelência nos serviços, garantimos praticidade com nossa plataforma online e passes
+                            exclusivos. Seja parte da nossa família, onde celebramos a sua singularidade.
+                        </p>
+                    </div>
+                </td>
+                <!-- Horário de Funcionamento -->
+                <td>
+                    <div class="horario">
+                        <ul>
+                            <li><strong>Domingo:</strong> Fechado</li>
+                            <li><strong>Segunda-feira:</strong> 08:00 – 16:00</li>
+                            <li><strong>Terça-feira:</strong> 08:00 – 16:00</li>
+                            <li><strong>Quarta-feira:</strong> 08:00 – 16:00</li>
+                            <li><strong>Quinta-feira:</strong> 08:00 – 16:00</li>
+                            <li><strong>Sexta-feira:</strong> 08:00 – 16:00</li>
+                            <li><strong>Sábado:</strong> Fechado</li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </footer>
+    <script>
+       document.getElementById('menu').addEventListener('click', function() {
+            let nav = document.getElementById('barra');
+            let conteudo = document.getElementById('conteudo');
+            
+            nav.classList.toggle('aberta');
+            conteudo.classList.toggle('aberta');
+        });
+    </script>
 </body>
 </html>
