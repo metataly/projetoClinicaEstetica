@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  background-color: rgb(178, 212, 178);
+  height: 15vh;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+}
+header nav {
+  background-color: white;
+  height: 10vh;
+  width: 100vw;
+  margin-top: 1.5vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header nav img {
+  margin-right: 10vw;
+  width: 15vw;
+}
+header nav ul {
+  display: flex;
+  width: 60vw;
+  justify-content: space-evenly;
+}
+header nav ul li {
+  padding: 1vw 5vw;
+  list-style: none;
+  cursor: pointer;
+}
+header nav ul li:hover {
+  background-color: rgba(45, 129, 93, 0.3);
+}
+header button {
+  width: 2vw;
+}
+
+main {
+  margin: 7vh 2vh;
+}
+main section {
+  border: 2px solid rgb(45, 129, 93);
+  border-radius: 20px;
+  margin-top: 3vh;
+}
+main section div {
+  padding: 3vh;
+}/*# sourceMappingURL=home.css.map */
