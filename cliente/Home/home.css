@@ -24,8 +24,8 @@ header nav {
   position: relative;
 }
 header nav img {
-  margin-right: 10vw;
-  width: 15vw;
+  width: 16vw;
+  margin-left: 30px;
 }
 header nav ul {
   display: flex;
@@ -39,7 +39,7 @@ header nav ul li {
   cursor: pointer;
 }
 header nav ul li:hover {
-  background-color: rgba(45, 129, 93, 0.3);
+  background-color: rgba(45, 129, 93, 0.3019607843);
 }
 header a {
   text-decoration: none;
@@ -121,14 +121,70 @@ main button:hover {
 main a {
   color: grey;
 }
+main p {
+  color: gray;
+  text-decoration: underline;
+}
+
+.container-detalhe {
+  width: 0;
+  max-height: 0;
+  overflow: hidden;
+  background-color: rgba(45, 129, 93, 0.3019607843);
+  border-radius: 14px;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.5s ease;
+}
+
+.container-detalhe.mostrar {
+  width: 30vw;
+  overflow: auto;
+  max-height: 35vh;
+  opacity: 1;
+}
+
+.container-detalhe p {
+  padding: 1.5vw;
+  text-align: justify;
+  color: black;
+  font-size: 1.1em;
+  text-decoration: none;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.container-conteudo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateX(0px);
+  transition: transform 0.5s ease-in, opacity 0.1s ease;
+}
+
+#sectContainer {
+  transform: translateX(0px);
+  transition: transform 0.5s ease-in, opacity 0.5s ease;
+}
+
+#sectContainer.mostrar {
+  transform: translateX(20px);
+  border: none;
+  box-shadow: none;
+  transition: transform 0.5s ease-in, opacity 0.5s ease;
+}
+
+.container-conteudo.mostrar {
+  transform: translateX(12px);
+  transition: transform 0.5s ease-in, opacity 0.5s ease;
+}
 
 .funcionario {
   display: flex;
   justify-content: space-around;
-  height: 40vh;
+  align-items: center;
+  height: 60vh;
 }
 .funcionario h4 {
-  font-size: 1.4em;
+  font-size: 1.3em;
 }
 .funcionario img {
   width: 8vw;
@@ -204,15 +260,15 @@ footer .horario li {
   background-color: white;
   height: 100vh;
   position: fixed;
-  top: 0;
   right: 0;
-  transition: width 0.4s ease-in;
-  overflow: hidden;
+  transition: width 0.4s ease-in-out;
+  content-visibility: hidden;
   z-index: 2;
   border-radius: 3px;
 }
 
 #barra.aberta {
+  content-visibility: visible;
   width: 20vw;
   z-index: 2;
   display: flex;

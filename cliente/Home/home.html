@@ -85,27 +85,53 @@
       <button>Criar Pacote</button>
       <br><br>
       <h2 id ="esp">Nossos Especialistas</h2>
-      <section class="funcionario">
-        <div>
+      <section class="funcionario" id = "sectContainer">
+        <div class = "container-conteudo">
             <img src="../../imagens/perfil.png" alt="">
-            <h4>Fulano de tal</h4>
-            <a href="#">Mostrar detalhes →</a>
+            <h4>Maria Ximenes</h4>
+            <p style = "cursor: pointer;" onclick='detalhe(this)'>Mostrar detalhes →</p>
+            <div class = "container-detalhe" >
+              <p>Conheça Maria Ximenes, nossa especialista em depilação na "Harmony Beauty". Com anos de experiência e habilidade excepcional, Maria é dedicada a proporcionar uma experiência suave e confortável a cada cliente. Sua atenção aos detalhes e profissionalismo tornam cada sessão de depilação uma jornada tranquila e confiável. Conte com Maria para elevar a sua experiência de beleza, garantindo resultados impecáveis com um toque de cuidado e expertise.</p>
+
+            </div>
         </div>
-        <div>
+        <div class = "container-conteudo">
           <img src="../../imagens/perfil.png" alt="">
-          <h4>Fulano de tal</h4>
-          <a href="#">Mostrar detalhes →</a>
+          <h4>Douglas Daraio</h4>
+          <p style = "cursor: pointer;" onclick='detalhe(this)'>Mostrar detalhes →</p>
+          <div class = "container-detalhe" >
+            <p>Conheça Douglas Daraio, especialista em preenchimento facial na "Harmony Beauty". Com paixão por realçar a beleza natural, suas técnicas avançadas garantem resultados elegantes. Confie em Douglas para uma experiência única de rejuvenescimento, onde o tempo se torna sua aliado, ressaltando sua beleza de maneira sutil e sofisticada.</p>
+
+          </div>
+      </div>
+      <div class = "container-conteudo">
+        <img src="../../imagens/perfil.png" alt="">
+        <h4>Gabriel Seidel</h4>
+        <p style = "cursor: pointer;" onclick='detalhe(this)'>Mostrar detalhes →</p>
+        <div class = "container-detalhe" >
+          <p>Conheça Gabriel Seidel, nosso especialista em limpeza de pele na "Harmony Beauty". Com cuidado e conhecimento técnico, Gabriel oferece tratamentos personalizados para uma experiência de rejuvenescimento eficaz e relaxante. Confie em Gabriel para realçar sua beleza natural e alcançar uma pele radiante e saudável.</p>
+
         </div>
-        <div>
+        </div>
+        <div class = "container-conteudo">
           <img src="../../imagens/perfil.png" alt="">
-          <h4>Fulano de tal</h4>
-          <a href="#">Mostrar detalhes →</a>
+          <h4>Kauã Pessoa</h4>
+          <p style = "cursor: pointer;" onclick='detalhe(this)'>Mostrar detalhes →</p>
+          <div class = "container-detalhe" >
+            <p>Conheça Kauã Pessoa, nosso especialista em tratamento de rugas na "Harmony Beauty". Com uma abordagem especializada e conhecimento avançado, Kauã oferece soluções personalizadas para rejuvenescimento facial. Sua experiência garante resultados naturais, realçando a beleza individual de cada cliente. Confie em Kauã para uma jornada de tratamento de rugas que destaca a sua melhor versão com cuidado e maestria.</p>
+
+          </div>
+      </div>
+          <div class = "container-conteudo">
+            <img src="../../imagens/perfil.png" alt="">
+            <h4>Nathaly Pereira</h4>
+            <p style = "cursor: pointer;" onclick='detalhe(this)'>Mostrar detalhes →</p>
+            <div class = "container-detalhe" >
+              <p>Conheça Nathaly Pereira, nossa especialista em podologia na "Harmony Beauty". Com atenção dedicada aos pés, Nathaly proporciona cuidados especializados para garantir conforto e bem-estar. Sua experiência e habilidade garantem tratamentos precisos, promovendo não apenas a saúde, mas também a estética dos pés. Confie em Nathaly para uma jornada de podologia que cuida e realça a beleza dos seus pés.</p>
+
+            </div>
         </div>
-        <div>
-          <img src="../../imagens/perfil.png" alt="">
-          <h4>Fulano de tal</h4>
-          <a href="#">Mostrar detalhes →</a>
-        </div>
+
       </section>
       <br><br>
       </section>
@@ -157,9 +183,38 @@
             let nav = document.getElementById('barra');
             let conteudo = document.getElementById('conteudo');
             
+            
             nav.classList.toggle('aberta');
             conteudo.classList.toggle('aberta');
         });
+
+        function detalhe(elemento) {
+        // Seleciona o contêiner principal
+        const containerSec = document.querySelector('#sectContainer');
+
+        // Encontra o pai do elemento clicado (container-conteudo)
+        const containerConteudo = elemento.parentElement;
+
+        // Seleciona o .container-detalhe dentro do pai correspondente
+        const containerDetalhe = containerConteudo.querySelector('.container-detalhe');
+
+        // Alterna a classe 'mostrar' no .container-detalhe correspondente
+        if (containerDetalhe.classList.contains('mostrar')) {
+          containerDetalhe.classList.remove('mostrar'); // Oculta o detalhe
+        } else {
+          containerDetalhe.classList.add('mostrar'); // Mostra o detalhe
+        }
+
+        // Alteração no contêiner geral
+        if (containerSec) {
+          if (Array.from(containerSec.querySelectorAll('.container-detalhe.mostrar')).length > 0) {
+            containerSec.classList.add('mostrar'); // Adiciona classe ao contêiner geral se algum detalhe estiver visível
+          } else {
+            containerSec.classList.remove('mostrar'); // Remove a classe se nenhum detalhe estiver visível
+          }
+        }
+      }
+
     </script>
 </body>
 </html>
