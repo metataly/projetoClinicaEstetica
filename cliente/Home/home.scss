@@ -10,14 +10,14 @@ header{
     display: flex;
     flex-direction: column;
     align-items: end;
-    box-shadow: rgba(0, 0, 0, 0.20) 0px 5px 15px;;
+    box-shadow: rgba(0, 0, 0, 0.20) 0px 5px 15px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 
     nav{
         background-color: white;
         height: 10vh;
         width: 100vw;
-        margin-top: 1.5vh;
+        margin-top: 5vh;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -62,7 +62,7 @@ header{
         border: none;
         cursor: pointer;
         z-index: 3;
-
+        position: fixed;
         &:hover{
             background-color:  rgba(45, 129, 93, 1);
         }
@@ -74,11 +74,12 @@ main{
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     
     h2{
         font-size: 2em;
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-weight: lighter;
     }
     
     section{
@@ -92,6 +93,9 @@ main{
         align-items: center;
         box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 
+        &:hover{
+            transition: transform (100px) 2s ease;
+        }
        
         .itens{
             padding: 3vh;
@@ -99,8 +103,8 @@ main{
             align-items: center;
 
             img{
-                width: 8vw;
-                padding: 1vw;
+                width: 7vw;
+                padding: 0.1vw;
                 border: 2px solid #2D815D;
                 border-radius: 50%;
             }
@@ -113,8 +117,9 @@ main{
             flex-direction: column;
             justify-content: space-evenly;
             padding: 1vw;
+            
             h3{
-                font-size: 1.8em;
+                font-size: 1.7em;
             }
             
         }
@@ -207,6 +212,8 @@ main{
     height: 60vh;
 
     h4{
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-weight: 500;
         font-size: 1.3em;
     }
 
@@ -245,15 +252,14 @@ main{
         background-color: transparent;
         width: 26vw;
         text-align: justify;
-        p{
-            
-        }
+       
     }
 }
 footer {
     padding: 20px;
     background-color: #2D815D;
     color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 
     .tabelaFooter {
         width: 100%;
