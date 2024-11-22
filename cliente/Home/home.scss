@@ -92,9 +92,11 @@ main{
         justify-content: space-between;
         align-items: center;
         box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        
+        transition: transform 0.3s ease;
 
         &:hover{
-            transition: transform (100px) 2s ease;
+            transform: scale(1.02);
         }
        
         .itens{
