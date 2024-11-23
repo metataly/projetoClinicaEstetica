@@ -128,7 +128,7 @@
             width: 100%;
             color: white;
             background-color: rgba(45, 129, 93, 1);
-
+            margin-bottom: 1vh;
             &:hover{
                 border: 1.5px solid #2D815D;
                 color: #2D815D;
@@ -199,18 +199,20 @@
             <h2>Resumo</h2>
             <div class="info">
                 <strong>Endereço:</strong>
-                Av. João Cabral de Mello Neto, 23 sala 48<br>
-                CEO Corporate Office - Barra da Tijuca - RJ
+                <p>Av. João Cabral de Mello Neto, 23 sala 48<br>
+                    CEO Corporate Office - Barra da Tijuca - RJ</p>
             </div>
             <div class="info">
                 <strong>Profissional:</strong>
-                Maria Ximenes
+                <p>Maria Ximenes</p>
             </div>
             <div class="info">
                 <strong>Serviço:</strong>
-                Depilação - 1 Hora
+                <p id="nomeServico" >Depilação - 1 Hora</p>
             </div>
-            <button onclick="window.location.href='./pagamento.html'">Continuar</button>
+            <button onclick="salvarAgendamento()">Pré-Reserva</button>
+            <button class="botaoPagamento" style="display: none;" onclick="window.location.href='./pagamento.html'">Ir Para Pagamento</button>
+
         </div>
     </div>
 
@@ -299,6 +301,45 @@
         updateMonthYear();
         generateCalendar();
         generateTimes();
+
+       // Requisição AJAX para salvar agendamento
+function salvarAgendamento() {
+    if (!selectedDate || !selectedTime) {
+        alert("Por favor, selecione uma data e um horário antes de continuar.");
+        return;
+    }
+
+    // Nome do serviço (no exemplo: fixo como "Depilação")
+    const servico = "Depilação";
+
+    // Formatando a data selecionada
+    const formattedDate = selectedDate.toISOString().split("T")[0];
+
+    // Criando a variável formData corretamente
+    const formData = new FormData();
+    formData.append("data", formattedDate);
+    formData.append("horario", selectedTime);
+    formData.append("servico", servico);
+
+    // Enviar requisição AJAX para o PHP
+    fetch("salvarAgendamento.php", {
+        method: "POST",
+        body: formData,
+    })
+    .then(response => response.json()) // Converte a resposta para JSON
+    .then(data => {
+        if (data.status === "success") {
+            alert(data.message);  // Exibe a mensagem de sucesso
+            // Exibe o botão de pagamento, caso o agendamento tenha sido salvo com sucesso
+            document.querySelector('.botaoPagamento').style.display = 'block';
+        } else {
+            alert(data.message);  // Exibe a mensagem de erro
+        }
+    })
+    .catch(error => {
+        console.error('Erro:', error);  // Captura erros de rede ou outro tipo de erro
+    });
+}
     </script>
 </body>
 </html>
