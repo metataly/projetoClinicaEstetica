@@ -1,45 +1,48 @@
 <?php
-$hostname = "localhost";
-$bancodedados = "clinicaestetica";
-$usuario = "root";
-$senha = "";
-
-// Conexão com o banco de dados
-$mysqli = new mysqli($hostname, $usuario, $senha, $bancodedados);
+$mysqli = new mysqli("localhost", "root", "", "clinicaestetica");
 
 if ($mysqli->connect_errno) {
-    die(json_encode(['success' => false, 'message' => 'Erro de conexão: ' . $mysqli->connect_error]));
+    die("Falha ao conectar: " . $mysqli->connect_error);
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Obter dados enviados
-    $id = intval($_POST['id']);
-    $nome = trim($_POST['nome']);
-    $funcao = trim($_POST['funcao']);
-    $salario = floatval($_POST['salario']);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Verifique se todos os dados foram recebidos
+    if (isset($_POST['nome']) && isset($_POST['funcao']) && isset($_POST['salario']) && isset($_POST['id'])) {
+        $nome = $_POST['nome'];
+        $funcao = $_POST['funcao'];
+        $salario = $_POST['salario'];
+        $id = $_POST['id'];
 
-    // Validar os dados
-    if ($id <= 0 || empty($nome) || empty($funcao) || $salario <= 0) {
-        echo json_encode(['success' => false, 'message' => 'Dados inválidos!']);
-        exit;
-    }
+        // Verifique se os valores não estão vazios
+        if (empty($nome) || empty($funcao) || empty($salario) || empty($id)) {
+            echo json_encode(['success' => false, 'message' => 'Dados incompletos ou inválidos.']);
+            exit;
+        }
 
-    // Atualizar dados no banco de dados
-    $query = "UPDATE funcionarios SET nome = ?, servico = ?, salario = ? WHERE id = ?";
-    $stmt = $mysqli->prepare($query);
+        // A query para atualizar o funcionário
+        $query = "UPDATE funcionarios SET nome = ?, servico = ?, salario = ? WHERE id = ?";
+        $stmt = $mysqli->prepare($query);
 
-    if ($stmt) {
+        if ($stmt === false) {
+            echo json_encode(['success' => false, 'message' => 'Erro na preparação da query: ' . $mysqli->error]);
+            exit;
+        }
+
+        // Associa os parâmetros e executa
         $stmt->bind_param("ssdi", $nome, $funcao, $salario, $id);
+
+        // Execute a query
         if ($stmt->execute()) {
             echo json_encode(['success' => true, 'message' => 'Funcionário atualizado com sucesso!']);
         } else {
-            echo json_encode(['success' => false, 'message' => 'Erro ao atualizar funcionário: ' . $stmt->error]);
+            echo json_encode(['success' => false, 'message' => 'Erro ao atualizar funcionário.']);
         }
+
         $stmt->close();
     } else {
-        echo json_encode(['success' => false, 'message' => 'Erro na preparação da consulta.']);
+        echo json_encode(['success' => false, 'message' => 'Dados incompletos ou inválidos.']);
     }
-    
+
     $mysqli->close();
 }
 ?>

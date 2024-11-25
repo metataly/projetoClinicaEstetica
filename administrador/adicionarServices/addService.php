@@ -8,30 +8,96 @@
   <link rel="stylesheet" href="../menu/barraLateral.css">
   <script src="../menu/menuLateral.js" defer></script>
   <script>
-    // Função para salvar o serviço no localStorage
-    function saveService() {
-        const nome = document.getElementById('servico').value;
-        const valor = document.getElementById('valor').value;
+    
+    function saveService() 
+    {
+      const nome = document.getElementById('servico').value;
+      const valor = document.getElementById('valor').value;
+      const funcionarioId = document.getElementById('funcionario').value;  // Obter o funcionário selecionado
 
-        // Verifica se os campos estão preenchidos
-        if (nome && valor) {
-            const newService = {
-                nome: nome,
-                valor: valor,
-            };
+      // Verifica se os campos estão preenchidos
+      if (nome && valor && funcionarioId) {
+          const newService = {
+              nome: nome,
+              valor: valor,
+              funcionarioId: funcionarioId,  // Associando ao funcionário selecionado
+          };
 
-            // Adiciona o serviço ao localStorage
-            let services = JSON.parse(localStorage.getItem('services')) || [];
-            services.push(newService);
-            localStorage.setItem('services', JSON.stringify(services));
+          // Verifica se já existe um serviço para o funcionário
+          let services = JSON.parse(localStorage.getItem('services')) || [];
+          
+          // Adiciona o novo serviço, evitando duplicação
+          const existingService = services.find(service => service.funcionarioId === funcionarioId && service.nome === nome);
+          if (existingService) {
+              alert("Este serviço já foi criado para este funcionário.");
+              return;  // Evita salvar o serviço duplicado
+          }
 
-            // Alerta e redireciona para a página de administração
-            alert("Serviço criado com sucesso!");
-            window.location.href = 'index-admin.html';  // Redireciona para index-admin.html
-        } else {
-            alert("Por favor, preencha todos os campos.");
-        }
+          services.push(newService);  // Adiciona o novo serviço
+          localStorage.setItem('services', JSON.stringify(services));
+
+          // Desabilita o botão enquanto o serviço está sendo criado
+          const createButton = document.querySelector('.create');
+          createButton.disabled = true;
+
+          // Alerta e redireciona para a página de administração
+          alert("Serviço criado com sucesso!");
+          window.location.href = '../home-admin/index-admin.html';  // Redireciona para a página de administração
+      } else {
+          alert("Por favor, preencha todos os campos.");
+      }
     }
+
+    // Função para carregar os funcionários no select
+    async function loadFuncionarios() 
+    {
+      try 
+      {
+        // Atualizado o caminho para o arquivo correto
+        const response = await fetch('../editarFuncionarios/getFuncionarios.php');
+        
+        // Log para verificar a resposta antes de tentar fazer o .json()
+        const text = await response.text();
+        console.log("Resposta do servidor: ", text);  // Log da resposta como texto
+
+        // Tente fazer o parse do JSON
+        const data = JSON.parse(text);  // Agora com o texto que você pegou
+
+        // Verificando se houve algum erro no retorno
+        if (!data.success) {
+          console.error('Erro ao carregar funcionários:', data.error || 'Erro desconhecido');
+          return;
+        }
+
+        // Agora acessando o array de funcionários corretamente
+        const funcionarios = data.funcionarios;
+
+        // Obtendo o select de funcionários
+        const select = document.getElementById('funcionario');
+
+        // Criando uma opção padrão
+        const defaultOption = document.createElement('option');
+        defaultOption.textContent = 'Selecione um funcionário';
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+        select.appendChild(defaultOption);
+
+        // Preenchendo o select com os funcionários
+        funcionarios.forEach(funcionario => {
+          const option = document.createElement('option');
+          option.value = funcionario.id;  // Usando o id como valor
+          option.textContent = funcionario.nome;  // Nome do funcionário
+          select.appendChild(option);
+        });
+      } catch (error) {
+        // Caso haja erro ao fazer a requisição
+        console.error('Erro ao carregar funcionários:', error);
+      }
+  }
+
+
+loadFuncionarios();
+
   </script>
 </head>
 <body>
@@ -50,8 +116,8 @@
           </div>
         </div>
         <ul>
-            <li><a href="#">Perfil</a></li>
-            <li><a href="../administrador/editarFuncionarios/funcionarios.php"></a>Funcionários</li>
+        <li><a href="../../administrador/home-admin/index-admin.html">Home</a></li> 
+            <li><a href="../../administrador/editarFuncionarios/funcionarios.php">Funcionários</a></li>
             <li><a href="../../Login/login.html">Mudar Conta</a></li>
             <li><a href="../../Index/index.html">Sair</a></li>
         </ul>
@@ -87,49 +153,11 @@
 
   </select>
 
-  <script>
-    async function loadFuncionarios() 
-    {
-      try 
-      {
-        const response = await fetch('../editarFuncionarios/getFuncionarios.php');
-        const funcionarios = await response.json();
-
-        if (funcionarios.error) 
-        {
-          console.error('Erro ao carregar funcionários:', funcionarios.error);
-          return;
-        }
-
-        const select = document.getElementById('funcionario');
-
-        const defaultOption = document.createElement('option');
-        defaultOption.textContent = 'Selecione um funcionário';
-        defaultOption.disabled = true;
-        defaultOption.selected = true;
-        select.appendChild(defaultOption);
-
-        funcionarios.forEach(funcionario => 
-        {
-          const option = document.createElement('option');
-          option.value = funcionario.id; 
-          option.textContent = funcionario.nome;
-          select.appendChild(option);
-        });
-      } 
-      catch (error) 
-      {
-        console.error('Erro ao carregar funcionários:', error);
-      }
-    }
-    loadFuncionarios();
-  
-  </script>
     <div class="team-grid">
       <div class="team-member">
         <img style="width: 120px; height: 120px;"src="../../imagens/funcionario.png" alt="Ícone de Membro" class="icon">
       </div>
-      <textarea class="description" placeholder="Adicionar descrição..."></textarea>
+      <textarea class="description" placeholder="Adicionar descrição do funcionário..."></textarea>
     </div>
   </section>
 </body>

@@ -12,47 +12,48 @@
     <title>Visão Geral - Admin</title>
     <script>
         // Função para carregar os serviços do localStorage e exibi-los
-        window.onload = function() {
-    let services = JSON.parse(localStorage.getItem('services')) || [];
+    window.onload = function() 
+    {
+            let services = JSON.parse(localStorage.getItem('services')) || [];
 
-    const servicesContainer = document.getElementById('servicesContainer');
-    servicesContainer.innerHTML = '';  // Limpa os serviços existentes
+        const servicesContainer = document.getElementById('servicesContainer');
+        servicesContainer.innerHTML = '';  // Limpa os serviços existentes
 
-    // Exibe cada serviço na página
-    services.forEach(service => {
-        const serviceElement = document.createElement('div');
-        serviceElement.classList.add('service');
-        serviceElement.innerHTML = `
-            <img src="../../imagens/Servicos.png" alt="${service.nome}">
-            <div>
-                <p>${service.nome}</p>
-                <a href="#" class="details"><strong>Mostrar detalhes ></strong></a>
-            </div>
-             <button class="delete" onclick="deleteService(event)">🗑️</button>
-            <button class="view">Visualizar</button>
-        `;
-        servicesContainer.appendChild(serviceElement);
-    });
-}
-function deleteService(event) {
-    const serviceElement = event.target.closest('.service'); // Encontra o elemento do serviço
-    const serviceName = serviceElement.querySelector('p').innerText; // Pega o nome do serviço
-
-    // Confirmação de exclusão
-    if (confirm(`Tem certeza de que deseja excluir o serviço "${serviceName}"?`)) {
-        // Recupera os serviços do localStorage
-        let services = JSON.parse(localStorage.getItem('services')) || [];
-
-        // Filtra os serviços, removendo o selecionado
-        services = services.filter(service => service.nome !== serviceName);
-
-        // Atualiza o localStorage
-        localStorage.setItem('services', JSON.stringify(services));
-
-        // Remove o serviço da página
-        serviceElement.remove();
+        // Exibe cada serviço na página
+        services.forEach(service => {
+            const serviceElement = document.createElement('div');
+            serviceElement.classList.add('service');
+            serviceElement.innerHTML = `
+                <img src="../../imagens/Servicos.png" alt="${service.nome}">
+                <div>
+                    <p>${service.nome}</p>
+                    <a href="#" class="details"><strong>Mostrar detalhes ></strong></a>
+                </div>
+                <button class="delete" onclick="deleteService(event)">🗑️</button>
+            `;
+            servicesContainer.appendChild(serviceElement);
+        });
     }
-}
+    function deleteService(event) 
+    {
+        const serviceElement = event.target.closest('.service'); // Encontra o elemento do serviço
+        const serviceName = serviceElement.querySelector('p').innerText; // Pega o nome do serviço
+
+        // Confirmação de exclusão
+        if (confirm(`Tem certeza de que deseja excluir o serviço "${serviceName}"?`)) {
+            // Recupera os serviços do localStorage
+            let services = JSON.parse(localStorage.getItem('services')) || [];
+
+            // Filtra os serviços, removendo o selecionado
+            services = services.filter(service => service.nome !== serviceName);
+
+            // Atualiza o localStorage
+            localStorage.setItem('services', JSON.stringify(services));
+
+            // Remove o serviço da página
+            serviceElement.remove();
+        }
+    }
     </script>
 </head>
 <body>
@@ -69,7 +70,7 @@ function deleteService(event) {
           </div>
         </div>
         <ul>
-            <li><a href="#">Perfil</a></li>
+            <li><a href="#">Home</a></li>
             <li><a href="../editarFuncionarios/funcionarios.php">Funcionários</a></li>
             <li><a href="../../Login/login.html">Mudar Conta</a></li>
             <li><a href="../../Index/index.html">Sair</a></li>
@@ -89,53 +90,48 @@ function deleteService(event) {
         <section class="services" >
             <h2>Serviços Disponíveis</h2>
             <div class="service">
-                <img src="../../imagens/Servicos.png" alt="Serviço 1">
+                <img src="../../imagens/preenchimento.png" alt="Serviço 1">
                 <div>
-                    <p>Nome do Serviço 1</p>
+                    <p>Preenchimento facial</p>
                     <a href="#" class="details"><strong>Mostrar detalhes ></strong></a>
                 </div>
                 <button class="delete" onclick="deleteService(event)">🗑️</button>
-                <button class="view">Visualizar</button>
             </div>
 
             <div class="service">
-                <img src="../../imagens/Servicos.png" alt="Serviço 2">
+                <img src="../../imagens/limpeza.png" alt="Serviço 2">
                 <div>
-                    <p>Nome do Serviço 2</p>
+                    <p>Limpeza de pele</p>
                     <a href="#" class="details"><strong>Mostrar detalhes ></strong></a>
                 </div>
                 <button class="delete" onclick="deleteService(event)">🗑️</button>
-                <button class="view">Visualizar</button>
             </div>
 
             <div class="service">
-                <img src="../../imagens/Servicos.png" alt="Serviço 3">
+                <img src="../../imagens/depilacao.png" alt="Serviço 3">
                 <div>
-                    <p>Nome do Serviço 3</p>
+                    <p>Depilação</p>
                     <a href="#" class="details"><strong>Mostrar detalhes ></strong></a>
                 </div>
                 <button class="delete" onclick="deleteService(event)">🗑️</button>
-                <button class="view">Visualizar</button>
             </div>
 
             <div class="service">
-                <img src="../../imagens/Servicos.png" alt="Serviço 4">
+                <img src="../../imagens/rugas.png" alt="Serviço 4">
                 <div>
-                    <p>Nome do Serviço 4</p>
+                    <p>Tratamento de rugas</p>
                     <a href="#" class="details"><strong>Mostrar detalhes ></strong></a>
                 </div>
                 <button class="delete" onclick="deleteService(event)">🗑️</button>
-                <button class="view">Visualizar</button>
             </div>
 
             <div class="service">
-                <img src="../../imagens/Servicos.png" alt="Serviço 5">
+                <img src="../../imagens/podologia.png" alt="Serviço 5">
                 <div>
-                    <p>Nome do Serviço 5</p>
+                    <p>Podologia</p>
                     <a href="#" class="details"><strong>Mostrar detalhes ></strong></a>
                 </div>
                 <button class="delete" onclick="deleteService(event)">🗑️</button>
-                <button class="view">Visualizar</button>
             </div>
 
             <div id="servicesContainer"></div>
@@ -151,27 +147,27 @@ function deleteService(event) {
             <div class="gridEquipe">
                 <div class="membroEquipe">
                     <img src="../../imagens/funcionario.png" alt="Funcionário 1">
-                    <p class="nomeEquipe">Funcionário 1</p>
+                    <p class="nomeEquipe">Douglas Daraio</p>
                     <a href="#" class="details"><strong>Ver Detalhes ></strong></a>
                 </div>
                 <div class="membroEquipe">
                     <img src="../../imagens/funcionario.png" alt="Funcionário 2">
-                    <p class="nomeEquipe">Funcionário 2</p>
+                    <p class="nomeEquipe">Nathaly Pereira</p>
                     <a href="#" class="details"><strong>Ver Detalhes ></strong></a>
                 </div>
                 <div class="membroEquipe">
                     <img src="../../imagens/funcionario.png" alt="Funcionário 3">
-                    <p class="nomeEquipe">Funcionário 3</p>
+                    <p class="nomeEquipe">Kauã Pessoa</p>
                     <a href="#" class="details"><strong>Ver Detalhes ></strong></a>
                 </div>
                 <div class="membroEquipe">
                     <img src="../../imagens/funcionario.png" alt="Funcionário 4">
-                    <p class="nomeEquipe">Funcionário 4</p>
+                    <p class="nomeEquipe">Maria Ximenes</p>
                     <a href="#" class="details"><strong>Ver Detalhes ></strong></a>
                 </div>
                 <div class="membroEquipe">
                     <img src="../../imagens/funcionario.png" alt="Funcionário 5">
-                    <p class="nomeEquipe">Funcionário 5</p>
+                    <p class="nomeEquipe">Gabriel Seidel</p>
                     <a href="#" class="details"><strong>Ver Detalhes ></strong></a>
                 </div>
             </div>

@@ -5,9 +5,9 @@ const btnSalvar = document.querySelector('#btn-salvar');
 const funcionariosLista = document.querySelector('#funcionarios-lista');
 
 let itens = [];
-let id = null;
+let id;  // Variável que armazenará o ID quando editando um funcionário
 
-// Abrir o modal (adicionar ou editar)
+// Função para abrir o modal de adicionar/editar
 function openModal(edit = false, index = null) {
   modalWrapper.classList.add('active');
   if (edit) {
@@ -16,86 +16,98 @@ function openModal(edit = false, index = null) {
     document.querySelector('#m-name').value = item.nome;
     document.querySelector('#m-function').value = item.funcao;
     document.querySelector('#m-salary').value = item.salario;
-    id = item.id; // Pega o ID real do banco
+    id = item.id;  // Armazena o ID do funcionário para edição
   } else {
     modalTitle.textContent = 'Adicionar Funcionário';
-    modalForm.reset();
-    id = null;
+    modalForm.reset();  // Limpa os campos do formulário
+    id = null;  // Não temos ID quando estamos adicionando
   }
 }
 
+// Função para fechar o modal
 function closeModal() {
   modalWrapper.classList.remove('active');
 }
 
-// Salvar (adicionar ou editar)
-btnSalvar.onclick = async (e) => {
+btnSalvar.onclick = (e) => {
   e.preventDefault();
+
   const name = document.querySelector('#m-name').value.trim();
   const funcao = document.querySelector('#m-function').value.trim();
-  const salario = parseFloat(document.querySelector('#m-salary').value.trim());
+  const salario = document.querySelector('#m-salary').value.trim();
 
-  if (!name || !funcao || isNaN(salario) || salario <= 0) {
-    alert('Preencha todos os campos corretamente!');
-    return;
+  // Log para verificar os dados antes de enviar
+  console.log("Enviando dados para o servidor:", { nome: name, funcao: funcao, salario: salario });
+
+  if (!name || !funcao || !salario) {
+      alert('Preencha todos os campos!');
+      return;
   }
 
-  const action = id !== null ? 'editFuncionarios.php' : 'addFuncionarios.php';
-  const data = { nome: name, funcao: funcao, salario: salario };
-  if (id !== null) data.id = id; // Inclui o ID no caso de edição
-
-  const result = await sendData(action, data);
-
-  if (result.success) {
-    alert(result.message);
-    loadItens(); // Recarrega a lista após a operação
-    closeModal();
+  // Envia os dados ao PHP
+  if (id) {
+    // Se houver ID, significa que estamos editando
+    sendData('editFuncionarios.php', { nome: name, funcao: funcao, salario: salario, id: id });
   } else {
-    alert('Erro: ' + result.message);
+    // Caso contrário, estamos adicionando
+    sendData('addFuncionarios.php', { nome: name, funcao: funcao, salario: salario });
   }
 };
 
-// Função para enviar dados ao servidor
+// Função para enviar os dados para o servidor
 async function sendData(url, data) {
-  try {
-    const response = await fetch(url, {
+  console.log("Enviando dados para o servidor:", data);
+
+  const response = await fetch(url, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: new URLSearchParams(data), // URL-encoded
-    });
-    return await response.json();
-  } catch (error) {
-    console.error('Erro na conexão com o servidor:', error);
-    return { success: false, message: 'Erro de conexão com o servidor.' };
+      body: new URLSearchParams(data),
+  });
+
+  const result = await response.json();
+  console.log("Resposta do servidor:", result);
+
+  if (result.success) {
+      alert(result.message);
+      loadItens();  // Recarrega a lista de funcionários
+      closeModal();  // Fecha o modal
+  } else {
+      alert(result.message);  // Exibe a mensagem de erro
   }
 }
 
-// Carregar lista de funcionários do servidor
+// Função para carregar a lista de funcionários
 async function loadItens() {
   try {
-    const response = await fetch('getFuncionario.php');
-    const data = await response.json();
-    if (data.success) {
-      itens = data.funcionarios;
-      renderList();
-    } else {
-      alert('Erro ao carregar funcionários: ' + data.message);
+    const response = await fetch('http://localhost/projetoClinicaestetica-main/administrador/editarFuncionarios/getFuncionarios.php');
+    const result = await response.json();
+
+    if (!result.success) {
+      console.error("Erro do servidor:", result.message);
+      alert('Erro ao carregar funcionários: ' + result.message);
+      return;
     }
+
+    // Atualiza a lista de itens com os dados recebidos
+    itens = result.funcionarios || [];
+    updateUI();
   } catch (error) {
-    console.error('Erro ao carregar funcionários:', error);
+    console.error("Erro ao carregar funcionários:", error);
+    alert('Erro ao carregar lista de funcionários. Veja o console.');
   }
 }
 
-// Renderizar lista no DOM
-function renderList() {
-  funcionariosLista.innerHTML = ''; // Limpa a lista antes de atualizar
+// Função para atualizar a interface com os dados dos funcionários
+function updateUI() {
+  const lista = document.querySelector('#funcionarios-lista');
+  lista.innerHTML = ''; // Limpa a lista antes de atualizar
   itens.forEach((item, index) => {
     const funcionarioDiv = document.createElement('div');
     funcionarioDiv.classList.add('funcionario');
     funcionarioDiv.innerHTML = `
-      <img src="../imagens/funcionario.png" alt="Funcionário">
+      <img src="../../imagens/funcionario.png" alt="Funcionário">
       <div class="infoFuncionario">
         <p><strong>Nome:</strong> ${item.nome}</p>
         <p><strong>Salário por hora:</strong> R$ ${item.salario}</p>
@@ -103,24 +115,46 @@ function renderList() {
         <p><strong>Serviço:</strong> ${item.servico}</p>
       </div>
       <button class="verEscala" onclick="openModal(true, ${index})">Editar</button>
-      <button class="verEscala" onclick="deleteItem(${item.id})">Excluir</button>
+      <button class="verEscala" onclick="deleteItem(${index})">Excluir</button>
     `;
-    funcionariosLista.appendChild(funcionarioDiv);
+    lista.appendChild(funcionarioDiv);
   });
 }
 
-// Função para deletar um funcionário
-async function deleteItem(id) {
-  if (confirm('Tem certeza que deseja excluir este funcionário?')) {
-    const result = await sendData('deleteFuncionario.php', { id: id });
-    if (result.success) {
-      alert(result.message);
-      loadItens();
-    } else {
-      alert('Erro: ' + result.message);
-    }
+// Função para excluir um funcionário
+function deleteItem(index) {
+  const funcionario = itens[index]; // Obtém o funcionário da lista pelo índice
+  const id = funcionario.id; // Garante que o ID seja extraído
+
+  if (!id) {
+    alert('Erro: ID inválido.');
+    return;
+  }
+
+  if (confirm(`Tem certeza que deseja excluir o funcionário "${funcionario.nome}"?`)) {
+    // Faz a requisição para deletar o funcionário
+    fetch('http://localhost/projetoClinicaestetica-main/administrador/editarFuncionarios/deleteFuncionario.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id: id }),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.success) {
+          alert(result.message);
+          loadItens(); // Recarrega a lista
+        } else {
+          alert('Erro ao excluir funcionário: ' + result.message);
+        }
+      })
+      .catch((error) => {
+        console.error('Erro ao excluir funcionário:', error);
+        alert('Erro ao excluir funcionário. Veja o console para mais detalhes.');
+      });
   }
 }
 
-// Carregar os funcionários ao iniciar
+// Carregar a lista de funcionários quando a página for carregada
 loadItens();

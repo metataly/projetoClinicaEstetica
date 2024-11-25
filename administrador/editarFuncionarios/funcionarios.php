@@ -27,7 +27,7 @@
         </div>
       </div>
       <ul>
-        <li><a href="#">Perfil</a></li>
+        <li><a href="../../administrador/home-admin/index-admin.html">Home</a></li>
         <li><a href="../editarFuncionarios/funcionarios.php">Funcionários</a></li>
         <li><a href="../../Login/login.html">Mudar Conta</a></li>
         <li><a href="../../Index/index.html">Sair</a></li>
