@@ -56,7 +56,7 @@
                 <a href="../PagDetalhe/depilacao.html">Mostrar detalhes →</a>
             </div>
         </div>
-        <button onclick="window.location.href='../Agenda/agenda.html'"> RESERVAR </button>
+    <button onclick="reservarServico('Depilação')" data-servico="Depilação">RESERVAR</button>
       </section>
       <section>
         <div class ="itens">
@@ -66,7 +66,7 @@
                 <a href="">Mostrar detalhes →</a>
             </div>
         </div>
-        <button onclick="window.location.href='../Agenda/agenda.html'"> RESERVAR </button>
+    <button onclick="reservarServico('Limpeza de pele')" data-servico="Limpeza de pele">RESERVAR</button>
       </section>
       <section>
         <div class ="itens">
@@ -76,7 +76,7 @@
                 <a href="#">Mostrar detalhes →</a>
             </div>
         </div>
-        <button onclick="window.location.href='../Agenda/agenda.html'"> RESERVAR </button>
+        <button onclick="reservarServico('Podologia')" data-servico="Podologia">RESERVAR</button>
       </section>
       <section>
         <div class ="itens">
@@ -86,7 +86,7 @@
                 <a href="#">Mostrar detalhes →</a>
             </div>
         </div>
-        <button onclick="window.location.href='../Agenda/agenda.html'"> RESERVAR </button>
+    <button onclick="reservarServico('Preenchimento Facial')" data-servico="Preenchimento Facial">RESERVAR</button>
       </section>
       <br><br><br>
       <br><br><br>
@@ -145,17 +145,14 @@
      <footer id = "ho">
         <table class="tabelaFooter">
             <tr>
-                <!-- Título Sobre Nós -->
                 <th>
                     <h2 style="text-align: center;">Sobre nós</h2>
                 </th>
-                <!-- Título Horário de Funcionamento -->
                 <th>
                     <h2 style="text-align: center;">Horário de Funcionamento</h2>
                 </th>
             </tr>
             <tr>
-                <!-- Texto Sobre Nós -->
                 <td>
                     <div class="textoFooter">
                         <p>
@@ -167,7 +164,6 @@
                         </p>
                     </div>
                 </td>
-                <!-- Horário de Funcionamento -->
                 <td>
                     <div class="horario">
                         <ul>
@@ -185,26 +181,30 @@
         </table>
     </footer>
     <script>
+
+      const profissionais = {
+        'Podologia': 'Nathaly Pereira',
+        'Depilação': 'Maria Ximenes',
+        'Limpeza de pele': 'Gabriel Seidel',
+        'Preenchimento facial': 'Douglas Daraio',
+    };
+      function reservarServico(servico) {
+        window.location.href = `../Agenda/agenda.html?servico=${encodeURIComponent(servico)}`;
+      }
+      
        document.getElementById('menu').addEventListener('click', function() {
             let nav = document.getElementById('barra');
             let conteudo = document.getElementById('conteudo');
-            
             
             nav.classList.toggle('aberta');
             conteudo.classList.toggle('aberta');
         });
 
         function detalhe(elemento) {
-        // Seleciona o contêiner principal
         const containerSec = document.querySelector('#sectContainer');
-
-        // Encontra o pai do elemento clicado (container-conteudo)
         const containerConteudo = elemento.parentElement;
-
-        // Seleciona o .container-detalhe dentro do pai correspondente
         const containerDetalhe = containerConteudo.querySelector('.container-detalhe');
 
-        // Alterna a classe 'mostrar' no .container-detalhe correspondente
         if (containerDetalhe.classList.contains('mostrar')) {
           containerDetalhe.classList.remove('mostrar'); // Oculta o detalhe
         } else {
@@ -214,9 +214,9 @@
         // Alteração no contêiner geral
         if (containerSec) {
           if (Array.from(containerSec.querySelectorAll('.container-detalhe.mostrar')).length > 0) {
-            containerSec.classList.add('mostrar'); // Adiciona classe ao contêiner geral se algum detalhe estiver visível
+            containerSec.classList.add('mostrar'); 
           } else {
-            containerSec.classList.remove('mostrar'); // Remove a classe se nenhum detalhe estiver visível
+            containerSec.classList.remove('mostrar');
           }
         }
       }

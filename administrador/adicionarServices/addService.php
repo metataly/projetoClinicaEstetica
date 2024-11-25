@@ -129,7 +129,7 @@
       <div class="team-member">
         <img style="width: 120px; height: 120px;"src="../../imagens/funcionario.png" alt="Ícone de Membro" class="icon">
       </div>
-      <textarea class="description" placeholder="Adicionar descrição do funcionário..."></textarea>
+      <textarea class="description" placeholder="Adicionar descrição..."></textarea>
     </div>
   </section>
 </body>

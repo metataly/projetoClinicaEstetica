@@ -10,19 +10,17 @@ if ($conn->connect_error) {
     die("Erro na conexão: " . $conn->connect_error);
 }
 
-// Verifica se o ID foi enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
     $id = intval($_POST['id']);
 
-    // Deleta o agendamento com base no ID
     $sql = "DELETE FROM servico WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
 
     if ($stmt->execute()) {
-        echo "Agendamento excluído com sucesso.";
+        echo "Agendamento cancelado com sucesso.";
     } else {
-        echo "Erro ao excluir agendamento.";
+        echo "Erro ao cancelar agendamento";
     }
 
     $stmt->close();

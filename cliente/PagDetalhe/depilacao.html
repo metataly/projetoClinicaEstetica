@@ -1,48 +1,58 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="pagDetalhe.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pattaya&display=swap" rel="stylesheet">
-    <title>Harmony Beauty | Detalhes </title>
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adicionar Serviço</title>
+  <link rel="stylesheet" href="pagDetalhe.css">
 </head>
 <body>
-    <header>
-        <a href="../Home/home.html"><img src="../../imagens/back.png" alt=""></a>
+  <header>
+    <a href="../Home/home.html"><img id="voltar" src="../../imagens/back.png" alt=""></a>
+    <nav>
         <img src="../../imagens/harmonyBeauty.png" alt="Logomarca harmonyBeauty">
-    </header>
-    <main>
-        <section>
-            <div>
-                <img src="../../imagens/depilacao.png" alt="">
-                <div class="valor">
-                    <h2>Depilação</h2>
-                    <h2><span>R$ 150,00</span></h2>
-                </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="service">
+        <div class="icon-container">
+            <img src="../../imagens/depilacao.png" alt="Ícone do Serviço" class="icon">
+        </div>
+        <div class="service-details">
+            <div class="input-group">
+                <h2>Depilação</h2>
+                <h3>R$ 150,00</h3>
             </div>
-            <div class="detail">
-                <h3>Detalhes</h3>
-                <div class = "details2">
-                    <img src="../../imagens/calendario.png" alt="">
-                    <h4>O próximo horário disponível é em Novembro 22, 2023 às 8:00 am</h4>
-                    <img src="../../imagens/pessoal.png" alt="">
-                    <h4>O próximo horário disponível é em Novembro 22, 2023 às 8:00 am</h4>
-                </div>
-                <button>RESERVAR</button>
-            </div>
-        </section>
-        <section>
-            <h2>Profissional</h2>
-            <img src="" alt="">
-            <h3>Fulano</h3>
-            <div>
-                texto
-            </div>
-        </section>
-    </main>
+        </div>
+    </section>
+    <!-- Bloco de Detalhes -->
+    <aside class="details">
+      <img src="../../imagens/harmonyBeauty.png" alt="Logo">
+      <h3>Detalhes</h3>
+      <ul>
+        <li><span>Endereço: </span>
+          Av. João Cabral de Mello Neto, 23 sala 48
+          CEO Corporate Office - Barra da Tijuca - RJ</li>
+        <li><span>Profissional:</span>
+          Maria Ximenes</li>
+      </ul>
+      <button class="create" onclick="window.location.href='../Agenda/agenda.html'">RESERVAR</button>
+    </aside>
+  </main>
+  <section class="team">
+    <h3 style="margin-left: 20px;">Funcionários</h3>
+    <div class="team-grid">
+      <div class="team-member">
+        <img style="width: 120px; height: 120px;"src="../../imagens/funcionario.png" alt="Ícone de Membro" class="icon">
+        <div>
+         <h3>Maria Ximenes</h3>
+        </div>
+      </div>
+      <div class="description">
+        <p>Depilação é um serviço estético voltado para a remoção de pelos indesejados em diferentes áreas do corpo e do rosto, promovendo uma aparência mais limpa e suave. O objetivo principal é atender às necessidades e preferências de cada cliente, oferecendo resultados duradouros e minimizando desconfortos. O serviço é personalizado, podendo incluir áreas específicas, como pernas, axilas, buço, sobrancelhas ou até o corpo inteiro. Nossos profissionais especializados garantem a segurança, a higienização adequada dos materiais e o conforto durante o processo, proporcionando uma experiência agradável e satisfatória.</p>
+      </div>
+    </div>
+  </section>
 </body>
 </html>

@@ -7,10 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pattaya&display=swap" rel="stylesheet">
     <title>Harmony Beauty | Minha Agenda</title>
-    
 </head>
 <body>
     <header>
@@ -20,97 +18,140 @@
         </nav>
     </header>
     <main>
-        <h2>Meus Agendamentos</h2>
-        <button>Filtrar por data</button>
-        <main id="agendamentos">
-            
-        </main>
+        <label for="data-filtro">Filtrar por data:</label>
+        <input type="date" id="data-filtro">
+        <button onclick="filtrarPorData()">Filtrar</button>
+        <main id="agendamentos"></main>
+        
+        <!-- Modal de Edição -->
         <div id="modal-editar" style="display: none;">
             <div class="modal-content">
                 <h3>Editar Agendamento</h3>
                 <form id="form-editar">
                     <label for="data">Data:</label>
                     <input type="text" id="data-editar" name="data" placeholder="Selecione a data">
-                    
                     <label for="horario">Horário:</label>
                     <input type="time" id="horario-editar" name="horario">
-                    
                 </form>
                 <button type="button" onclick="salvarEdicao()">Salvar</button>
                 <button type="button" onclick="fecharModal()">Cancelar</button>
             </div>
         </div>
-        
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
+
+        // Função para filtrar agendamentos por data
+        function filtrarPorData() {
+            const dataFiltro = document.getElementById('data-filtro').value;
+
+            if (dataFiltro) {
+                carregarAgendamentos(dataFiltro);
+            } else {
+                alert('Por favor, selecione uma data para filtrar.');
+            }
+        }
+
+        function carregarAgendamentos(dataFiltro = '') {
+            let url = 'minhaAgenda.php'; 
+            if (dataFiltro) {
+                url += `?data=${dataFiltro}`;
+            }
+
+            fetch(url)
+                .then(response => response.json())
+                .then(agendamentos => {
+                    const agendamentosSection = document.getElementById('agendamentos');
+                    agendamentosSection.innerHTML = '';  // Limpa o conteúdo atual
+
+                    agendamentos.forEach(agendamento => {
+                        const divItem = document.createElement('div');
+                        divItem.classList.add('itens');
+
+                        divItem.innerHTML = `
+                            <section>
+                                <img style="width: 8vw; border: 2px solid #2D815D; border-radius: 50%; margin-left: 2vw; padding: 5px" 
+                                src="../../imagens/agendamento.png">
+                                <div style="width: 55vw;">
+                                    <h3>${agendamento.servico}</h3>
+                                    <p>Data: ${formatarData(agendamento.data)} - Horário: ${formatarHora24(agendamento.horario)}</p>
+                                </div>
+                                <div>
+                                    <button onclick="editarAgendamento(${agendamento.id}, '${agendamento.data}', '${agendamento.horario}', '${agendamento.servico}')">Editar</button>
+                                    <button onclick="excluirAgendamento(${agendamento.id})">Cancelar</button>
+                                </div>
+                            </section>
+                        `;
+                        agendamentosSection.appendChild(divItem);
+                    });
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar agendamentos:', error);
+                });
+        }
+
+        // Função para editar agendamento
         function editarAgendamento(id, data, horario, servico) {
-        // Exibe o modal de edição
-        const modal = document.getElementById('modal-editar');
-        modal.style.display = 'flex';
+            const modal = document.getElementById('modal-editar');
+            modal.style.display = 'flex';
+           
+            document.getElementById('data-editar').value = data;
+            document.getElementById('horario-editar').value = horario;
 
-        // Preenche os campos do modal com os valores atuais
-        document.getElementById('data-editar').value = data;
-        document.getElementById('horario-editar').value = horario;
+    
+            flatpickr("#data-editar", {
+                dateFormat: "Y-m-d",
+                defaultDate: data,
+            });
 
-        // Inicializa o Flatpickr no campo de data
-        flatpickr("#data-editar", {
-            dateFormat: "Y-m-d", // Formato esperado pelo backend
-            defaultDate: data,  // Data atual do agendamento
-        });
+            modal.dataset.id = id;
+        }
 
-        // Salva o ID do agendamento no modal
-        modal.dataset.id = id;
-    }
+        // Função para salvar a edição do agendamento
+        function salvarEdicao() {
+            const modal = document.getElementById('modal-editar');
+            const id = modal.dataset.id;
+            const novaData = document.getElementById('data-editar').value;
+            const novoHorario = document.getElementById('horario-editar').value;
 
-    // Função para salvar as alterações
-    function salvarEdicao() {
-        const modal = document.getElementById('modal-editar');
-        const id = modal.dataset.id; // Recupera o ID do agendamento
-        const novaData = document.getElementById('data-editar').value;
-        const novoHorario = document.getElementById('horario-editar').value;
+            const formData = new FormData();
+            formData.append("id", id);
+            formData.append("data", novaData);
+            formData.append("horario", novoHorario);
 
-        // Envia os dados para o backend
-        const formData = new FormData();
-        formData.append("id", id);
-        formData.append("data", novaData);
-        formData.append("horario", novoHorario);
+            fetch('editarAgendamento.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+                fecharModal();
+                carregarAgendamentos();
+            })
+            .catch(error => console.error('Erro ao editar:', error));
+        }
 
-        fetch('editarAgendamento.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.text())
-        .then(data => {
-            alert(data); // Exibe feedback do servidor
-            fecharModal();
-            carregarAgendamentos(); // Atualiza os agendamentos
-        })
-        .catch(error => console.error('Erro ao editar:', error));
-    }
 
-    // Função para fechar o modal
-    function fecharModal() {
-        document.getElementById('modal-editar').style.display = 'none';
-    }
+        function fecharModal() {
+            document.getElementById('modal-editar').style.display = 'none';
+        }
 
-        // Função para excluir o agendamento
+        // Função para excluir agendamento
         function excluirAgendamento(id) {
             if (confirm("Tem certeza que deseja excluir este agendamento?")) {
                 const formData = new FormData();
                 formData.append("id", id);
-                console.log('ID do agendamento a excluir:', id);
-                
+
                 fetch('excluirAgendamento.php', {
                     method: 'POST',
                     body: formData
                 })
                 .then(response => response.text())
                 .then(data => {
-                    console.log(data); // Log para depuração
-                    alert(data);  // Exibe a resposta do servidor
-                    carregarAgendamentos();  // Recarrega os agendamentos após a exclusão
+                    alert(data);
+                    carregarAgendamentos();
                 })
                 .catch(error => {
                     console.error('Erro ao excluir agendamento:', error);
@@ -118,42 +159,8 @@
                 });
             }
         }
-        // Função para carregar os agendamentos
-        function carregarAgendamentos() {
-    fetch('minhaAgenda.php')  // Fazendo requisição ao PHP
-        .then(response => response.json())
-        .then(agendamentos => {
-            const agendamentosSection = document.getElementById('agendamentos');
-            agendamentosSection.innerHTML = '';  // Limpa o conteúdo atual
-
-            agendamentos.forEach(agendamento => {
-                const divItem = document.createElement('div');
-                divItem.classList.add('itens');
-
-                divItem.innerHTML = `
-                <section>
-                    <img style="width: 8vw; border: 2px solid #2D815D; border-radius: 50%; margin-left: 2vw; padding: 5px" 
-                    src="../../imagens/agendamento.png">
-                    <div style="width: 55vw;">
-                        <h3>${agendamento.servico}</h3>
-                        <p>Data: ${formatarData(agendamento.data)} - Horário: ${formatarHora24(agendamento.horario)}</p>
-                    </div>
-                    <div>
-                        <button onclick="editarAgendamento(${agendamento.id}, '${agendamento.data}', '${agendamento.horario}', '${agendamento.servico}')">Editar</button>
-                        <button onclick="excluirAgendamento(${agendamento.id})">Cancelar</button>
-                    </div>
-                </section>
-            `;
-                agendamentosSection.appendChild(divItem);
-            });
-        })
-        .catch(error => {
-            console.error('Erro ao carregar agendamentos:', error);
-        });
-}
 
 
-        // Função para formatar a data
         function formatarData(data) {
             const partes = data.split('-');
             const dia = partes[2];
@@ -161,7 +168,6 @@
             return `${dia}/${mes}`;
         }
 
-        // Função para formatar a hora no formato 24h sem zeros extras
         function formatarHora24(hora24) {
             let [hour, minute] = hora24.split(':');
             hour = parseInt(hour);
@@ -169,8 +175,7 @@
             return `${hour}:${minute}`;
         }
 
-        // Carregar os agendamentos assim que a página for carregada
-        document.addEventListener('DOMContentLoaded', carregarAgendamentos);
+        document.addEventListener('DOMContentLoaded', () => carregarAgendamentos());
     </script>
 </body>
 </html>

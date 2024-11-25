@@ -204,7 +204,7 @@
             </div>
             <div class="info">
                 <strong>Profissional:</strong>
-                <p>Maria Ximenes</p>
+                <p  id = "nomeProfissional">Maria Ximenes</p>
             </div>
             <div class="info">
                 <strong>Serviço:</strong>
@@ -217,6 +217,39 @@
     </div>
 
     <script>
+       // Função para obter parâmetros da URL
+       function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Captura o valor do parâmetro "servico"
+        const servico = getQueryParam('servico');
+
+        // Exibe o serviço na página
+        if (servico) {
+            document.getElementById('nomeServico').innerText = decodeURIComponent(servico);
+        }
+
+        
+        const profissionais = {
+        'Podologia': 'Nathaly Pereira',
+        'Depilação': 'Maria Ximenes',
+        'Limpeza de pele': 'Gabriel Seidel',
+        'Preenchimento Facial': 'Douglas Daraio',
+      };
+
+        // Alterar o nome do profissional baseado no serviço
+        function alterarProfissional(servico) {
+            const nomeProfissional = profissionais[servico] || 'Profissional não encontrado';
+            document.getElementById('nomeProfissional').innerText = nomeProfissional;
+        }
+
+        // Se o serviço estiver presente na URL, altere o nome do profissional
+        if (servico) {
+            alterarProfissional(servico);
+        }
+
         const calendarGrid = document.getElementById('calendarGrid');
         const monthYear = document.getElementById('monthYear');
         const timeButtons = document.getElementById('timeButtons');
@@ -231,25 +264,25 @@
             '10:30', '10:45', '11:00', '11:15', '11:30',
         ];
 
-        // Atualiza o cabeçalho do calendário
+        
         function updateMonthYear() {
             const options = { month: 'long', year: 'numeric' };
             monthYear.textContent = currentDate.toLocaleDateString('pt-BR', options);
         }
 
-        // Gera os dias do mês
+        
         function generateCalendar() {
             calendarGrid.innerHTML = '';
             const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
             const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
 
-            // Preenche os dias em branco antes do início do mês
+            
             for (let i = 0; i < firstDay.getDay(); i++) {
                 const blank = document.createElement('div');
                 calendarGrid.appendChild(blank);
             }
 
-            // Preenche os dias do mês
+            
             for (let day = 1; day <= lastDay.getDate(); day++) {
                 const dayDiv = document.createElement('div');
                 dayDiv.textContent = day;
@@ -258,7 +291,6 @@
             }
         }
 
-        // Gera os horários fixos
         function generateTimes() {
             timeButtons.innerHTML = '';
             times.forEach(time => {
@@ -269,76 +301,65 @@
             });
         }
 
-        // Seleciona uma data
+       
         function selectDate(dayElement, day) {
             selectedDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
             document.querySelectorAll('.calendar-grid div').forEach(div => div.classList.remove('selected'));
             dayElement.classList.add('selected');
         }
 
-        // Seleciona um horário
         function selectTime(buttonElement, time) {
             selectedTime = time;
             document.querySelectorAll('.time-slots button').forEach(btn => btn.classList.remove('selected'));
             buttonElement.classList.add('selected');
         }
 
-        // Navega para o mês anterior
+        // Navegação mes
         function prevMonth() {
             currentDate.setMonth(currentDate.getMonth() - 1);
             updateMonthYear();
             generateCalendar();
         }
 
-        // Navega para o próximo mês
         function nextMonth() {
             currentDate.setMonth(currentDate.getMonth() + 1);
             updateMonthYear();
             generateCalendar();
         }
 
-        // Inicializa o calendário e horários
         updateMonthYear();
         generateCalendar();
         generateTimes();
 
        // Requisição AJAX para salvar agendamento
-function salvarAgendamento() {
-    if (!selectedDate || !selectedTime) {
-        alert("Por favor, selecione uma data e um horário antes de continuar.");
-        return;
-    }
-
-    // Nome do serviço (no exemplo: fixo como "Depilação")
-    const servico = "Depilação";
-
-    // Formatando a data selecionada
-    const formattedDate = selectedDate.toISOString().split("T")[0];
-
-    // Criando a variável formData corretamente
-    const formData = new FormData();
-    formData.append("data", formattedDate);
-    formData.append("horario", selectedTime);
-    formData.append("servico", servico);
-
-    // Enviar requisição AJAX para o PHP
-    fetch("salvarAgendamento.php", {
-        method: "POST",
-        body: formData,
-    })
-    .then(response => response.json()) // Converte a resposta para JSON
-    .then(data => {
-        if (data.status === "success") {
-            alert(data.message);  // Exibe a mensagem de sucesso
-            // Exibe o botão de pagamento, caso o agendamento tenha sido salvo com sucesso
-            document.querySelector('.botaoPagamento').style.display = 'block';
-        } else {
-            alert(data.message);  // Exibe a mensagem de erro
+       function salvarAgendamento() {
+        if (!selectedDate || !selectedTime) {
+            alert("Por favor, selecione uma data e um horário antes de continuar.");
+            return;
         }
-    })
-    .catch(error => {
-        console.error('Erro:', error);  // Captura erros de rede ou outro tipo de erro
-    });
+
+        const formattedDate = selectedDate.toISOString().split("T")[0];
+        const servico = getQueryParam('servico') || "Serviço não especificado";
+
+        // Dados do agendamento
+        const formData = new FormData();
+        formData.append("data", formattedDate);
+        formData.append("horario", selectedTime);
+        formData.append("servico", servico);
+
+        fetch("./salvarAgendamento.php", {
+            method: "POST",
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert("Agendamento salvo com sucesso!");
+            document.querySelector('.botaoPagamento').style.display = 'block';
+        })
+        .catch(error => {
+            console.error("Erro ao salvar agendamento:", error);
+            alert("Houve um erro ao salvar o agendamento.");
+        });
 }
     </script>
 </body>

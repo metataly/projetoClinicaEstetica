@@ -8,20 +8,20 @@ $banco = 'harmonybeauty';
 // Conectar ao banco de dados
 $conn = new mysqli($host, $usuario, $senha, $banco);
 
-// Verificar conexão
+
 if ($conn->connect_error) {
-    // Retorna um JSON com erro de conexão
+    
     echo json_encode(["status" => "error", "message" => "Erro na conexão com o banco de dados: " . $conn->connect_error]);
-    exit(); // Encerra o script após enviar a resposta de erro
+    exit(); 
 }
 
-// Receber os dados enviados via POST
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = $_POST['data'];
     $horario = $_POST['horario'];
     $servico = $_POST['servico'];
 
-    // Validar os dados recebidos
+ 
     if (!empty($data) && !empty($horario) && !empty($servico)) {
         // Inserir os dados no banco de dados
         $sql = "INSERT INTO servico (data, horario, servico) VALUES (?, ?, ?)";
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $stmt->close();
     } else {
-        // Retorna erro em JSON caso algum dado esteja faltando
+      
         echo json_encode(["status" => "error", "message" => "Data, horário ou serviço não informados."]);
     }
 }
