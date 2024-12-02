@@ -1,0 +1,336 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  background-color: #2D815D;
+  height: 15vh;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+header nav {
+  background-color: white;
+  height: 10vh;
+  width: 100vw;
+  margin-top: 5vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+header nav img {
+  width: 16vw;
+  margin-left: 30px;
+}
+header nav ul {
+  display: flex;
+  width: 60vw;
+  justify-content: space-evenly;
+}
+header nav ul li {
+  padding: 1vw 5vw;
+  list-style: none;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+header nav ul li:hover {
+  background-color: rgba(45, 129, 93, 0.3019607843);
+}
+header a {
+  text-decoration: none;
+  color: black;
+}
+header a:visited {
+  color: black;
+}
+header #menu {
+  width: 2vw;
+  height: 4vh;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  z-index: 3;
+  position: fixed;
+}
+header #menu:hover {
+  background-color: rgb(45, 129, 93);
+}
+
+main {
+  margin: 7vh 2vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+main h2 {
+  font-size: 2em;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-weight: lighter;
+}
+main section {
+  width: 95vw;
+  height: 20vh;
+  border: 2px solid rgb(45, 129, 93);
+  border-radius: 20px;
+  margin-top: 3vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  transition: transform 0.3s ease;
+}
+main section:hover {
+  transform: scale(1.02);
+}
+main section .itens {
+  padding: 3vh;
+  display: flex;
+  align-items: center;
+}
+main section .itens img {
+  width: 7vw;
+  padding: 0.1vw;
+  border: 2px solid #2D815D;
+  border-radius: 50%;
+}
+main section .info {
+  height: 10vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 1vw;
+}
+main section .info h3 {
+  font-size: 1.7em;
+}
+main button {
+  height: 7vh;
+  width: 10vw;
+  border-radius: 14px;
+  margin-right: 2vw;
+  margin-top: 2vh;
+  background-color: transparent;
+  color: #2D815D;
+  border: 1px solid #2D815D;
+}
+main button:hover {
+  color: white;
+  cursor: pointer;
+  background-color: rgb(45, 129, 93);
+}
+main a {
+  color: grey;
+}
+main p {
+  color: gray;
+  text-decoration: underline;
+}
+
+.container-detalhe {
+  width: 0;
+  max-height: 0;
+  overflow: hidden;
+  background-color: rgba(45, 129, 93, 0.3019607843);
+  border-radius: 14px;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.5s ease;
+}
+
+.container-detalhe.mostrar {
+  width: 30vw;
+  overflow: auto;
+  max-height: 35vh;
+  opacity: 1;
+}
+
+.container-detalhe p {
+  padding: 1.5vw;
+  text-align: justify;
+  color: black;
+  font-size: 1.1em;
+  text-decoration: none;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.container-conteudo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateX(0px);
+  transition: transform 0.5s ease-in, opacity 0.1s ease;
+}
+
+#sectContainer {
+  transform: translateX(0px);
+  transition: transform 0.5s ease-in, opacity 0.5s ease;
+}
+
+#sectContainer.mostrar {
+  transform: translateX(20px);
+  border: none;
+  box-shadow: none;
+  transition: transform 0.5s ease-in, opacity 0.5s ease;
+}
+
+.container-conteudo.mostrar {
+  transform: translateX(12px);
+  transition: transform 0.5s ease-in, opacity 0.5s ease;
+}
+
+.funcionario {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 60vh;
+}
+.funcionario h4 {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-weight: 500;
+  font-size: 1.3em;
+}
+.funcionario img {
+  width: 8vw;
+  padding: 1vw;
+  border: 2px solid #2D815D;
+  border-radius: 50%;
+}
+
+.sobre {
+  width: 95vw;
+  height: 40vh;
+  border: none;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-e;
+}
+.sobre div {
+  width: 40vw;
+  border: 2px solid rgba(45, 129, 93, 0.3568627451);
+  border-radius: 14px;
+  background-color: rgba(45, 129, 93, 0.3568627451);
+  font-size: 1.2em;
+  padding: 3vh;
+}
+.sobre #horario {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  background-color: transparent;
+  width: 26vw;
+  text-align: justify;
+}
+
+footer {
+  padding: 20px;
+  background-color: #2D815D;
+  color: white;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+footer .tabelaFooter {
+  width: 100%;
+  border-spacing: 20px;
+  table-layout: fixed;
+}
+footer .tabelaFooter th, footer td {
+  vertical-align: top;
+  text-align: left;
+}
+footer .tabelaFooter th {
+  font-size: 1.5em;
+  padding-bottom: 15px;
+}
+footer .textoFooter {
+  background-color: rgba(36, 255, 0, 0.3);
+  border-radius: 15px;
+  padding: 20px;
+  font-size: 18px;
+  text-align: justify;
+}
+footer .horario {
+  font-size: 18px;
+  text-align: center;
+}
+footer .horario ul {
+  list-style: none;
+  padding: 0;
+}
+footer .horario li {
+  margin-bottom: 5px;
+}
+
+#barra {
+  width: 0;
+  background-color: white;
+  height: 100vh;
+  position: fixed;
+  right: 0;
+  transition: width 0.4s ease-in-out;
+  content-visibility: hidden;
+  z-index: 2;
+  border-radius: 3px;
+}
+
+#barra.aberta {
+  content-visibility: visible;
+  width: 20vw;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding: 1vw;
+}
+#barra.aberta h2 {
+  padding: 2vw;
+}
+#barra.aberta img {
+  width: 6vw;
+  padding: 1vw;
+  border: 2px solid #2D815D;
+  border-radius: 50%;
+}
+#barra.aberta ul {
+  width: 18vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3vw;
+}
+#barra.aberta ul li {
+  padding: 2vw;
+  font-size: 1.2em;
+  list-style: none;
+  width: 15vw;
+  cursor: pointer;
+}
+#barra.aberta ul li:hover {
+  background-color: rgb(178, 212, 178);
+}
+#barra.aberta ul li a {
+  text-decoration: none;
+  color: black;
+}
+#barra.aberta ul li a:visited {
+  color: black;
+}
+
+#conteudo.aberta {
+  transition: margin-right 0.3s ease-in-out;
+  background-color: rgba(128, 128, 128, 0.5);
+}
+
+#perfil {
+  display: flex;
+  align-items: center;
+}
+#perfil div {
+  padding: 1vw;
+  font-weight: bold;
+}/*# sourceMappingURL=home.css.map */

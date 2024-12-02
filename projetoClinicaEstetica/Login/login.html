@@ -1,0 +1,90 @@
+<!-- feito pelos alunos Kauã Victor Rodrigues Pessoa e Nathaly Pereira -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <title>Harmony Beauty | Login</title>
+
+    <style>
+        body{
+            background-color: rgba(232, 232, 232, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Inter;
+        }
+
+        main{
+            background-color: rgba(255, 255, 255, 1);
+            width: 45vw;
+            height: 70vh;
+            padding: 2vh;
+            margin-top: 10vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;;
+            border-radius: 15px;
+        }
+
+        section{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 25vw;       
+            height: 20vh;
+        }
+
+        div{
+            height: 30vh;
+            width: 20vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+
+            button{
+                
+                width: 20vw;
+                height: 8vh;
+                cursor: pointer;
+                border: 2px solid rgba(45, 129, 93, 1);
+                border-radius: 17px;
+                background-color: transparent;
+                color: rgba(45, 129, 93, 1);
+
+                &:hover{
+                    color: white;
+                    background-color: rgba(45, 129, 93, 1);
+
+                }
+            }
+        }
+
+        img{
+            width: 20vw;
+        }
+
+
+    </style>
+    
+</head>
+<body>
+   <main>
+    <section>
+        <img src="../imagens/harmonyBeauty.png" alt="Logomarca harmonyBeauty">
+        <h2>Escolha uma forma de Login</h2>
+    </section>
+    
+    <div>
+        <button onclick="window.location.href='../administrador/home-admin/index-admin.php'">Entrar como Administrador</button>
+        <button onclick="window.location.href='../cliente/Home/home.html'">Entrar como Cliente</button>
+    </div>
+   </main>
+</body>
+</html>

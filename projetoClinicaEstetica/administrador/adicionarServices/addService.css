@@ -1,0 +1,288 @@
+/* Reset */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body 
+{
+  font-family: Arial, sans-serif;
+  padding: 10px;
+}
+
+/* Cabeçalho */
+header 
+{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #fff;
+  height: 100px;
+  margin-bottom: 40px;
+  border-bottom: 1.5px solid #09613B;
+}
+
+header img 
+{
+  height: 70px;
+  margin: 0 auto;
+}
+
+header button 
+{
+  border: none;
+  background: #2D815D;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 20px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+header button:hover 
+{
+  background: #09613B;
+}
+
+/* Conteúdo Principal */
+main 
+{
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.service, .details 
+{
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.service 
+{
+  flex: 3;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  text-align: center;
+}
+
+.service .icon-container 
+{
+  position: relative;
+  margin-right: 20px;
+}
+
+.service .icon 
+{
+  width: 160px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+/* Detalhes */
+.details 
+{
+  flex: 1;
+  border: 2px solid #2D815D;
+}
+
+.details h3 
+{
+  color: #2D815D;
+  margin-bottom: 10px;
+}
+
+.details ul 
+{
+  list-style: none;
+  margin-bottom: 20px;
+}
+
+.details ul li 
+{
+  margin-bottom: 10px;
+}
+
+.details button.create 
+{
+  display: block;
+  width: 100%;
+  padding: 10px 0;
+  background: #2D815D;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.details button.create:hover 
+{
+  background: #09613B;
+}
+
+/* Equipe */
+.team 
+{
+  margin-top: 30px;
+}
+
+.team h3 
+{
+  margin-bottom: 20px;
+  color: #2D815D;
+}
+
+.team .team-member 
+{
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.team .team-member .icon 
+{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.team .team-member .edit 
+{
+  margin-left: 10px;
+  font-size: 12px;
+  color: #2D815D;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+/* Estilo geral da seção */
+.team 
+{
+  margin-top: 30px;
+}
+
+.team h3 
+{
+  color: #2D815D;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+/* Configuração do grid */
+.team-grid 
+{
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 600px;
+  align-items: center;
+}
+
+/* Estilo da foto e botão */
+.team-member 
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.team-member .icon 
+{
+  width: 100px;
+  height: 100px;
+  margin-bottom: 10px;
+  border-radius: 50%;
+}
+
+.team-member button.edit 
+{
+  background-color: #2D815D;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.team-member button.edit:hover 
+{
+  background-color: #09613B;
+}
+
+/* Estilo da caixa de texto */
+.description 
+{
+  width: 100%;
+  height: 160px;
+  border: 1px solid #2D815D;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 14px;
+  color: #333;
+  background-color: rgba(36, 255, 0, 0.3);
+  resize: none;
+}
+
+input[type="text"] 
+{
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: #f9f9f9;
+}
+
+input[type="text"]:focus 
+{
+  border-color: #2D815D;
+  outline: none;
+  box-shadow: 0 0 5px rgba(45, 129, 93, 0.3);
+}
+
+input[type="text"]::placeholder 
+{
+  color: #aaa;
+  font-style: italic;
+}
+.labelStyle
+{
+  font-size: 18px;
+  font-weight: 550;
+  color: #2D815D;
+  text-align: left;
+}
+select 
+{
+  width: 200px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  font-size: 16px;
+}
+
+select:focus 
+{
+  border-color: #2D815D;
+  outline: none;
+  box-shadow: 0 0 5px rgba(45, 129, 93, 0.3);
+}
+.criarServico {
+  padding: 10px 0;
+  font-size: 16px;
+  color: #444;
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
