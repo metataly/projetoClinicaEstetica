@@ -93,8 +93,9 @@ main
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    object-fit: cover;
+    object-fit: contain;
     margin-right: 15px;
+    flex-shrink: 0;
 }
 
 .service div 
@@ -270,13 +271,17 @@ footer
 }
 button.delete 
 {
-  background: none;
-  border: none;
-  color: red;
-  font-size: 20px;
-  cursor: pointer;
-  margin-left: 10px;
+    background: none;
+    border: 1px solid #ccc; /* Adiciona borda para visualizar o botão */
+    color: red;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 10px;
 }
-button.delete:hover {
-  color: darkred;
+  
+button.delete:hover 
+{
+    color: darkred;
+    border: 1px solid darkred; /* Adiciona borda para destaque */
 }
+  

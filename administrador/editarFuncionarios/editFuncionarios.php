@@ -1,5 +1,5 @@
 <?php
-$mysqli = new mysqli("localhost", "root", "", "clinicaestetica");
+$mysqli = new mysqli("localhost", "root", "", "harmonybeauty");
 
 if ($mysqli->connect_errno) {
     die("Falha ao conectar: " . $mysqli->connect_error);

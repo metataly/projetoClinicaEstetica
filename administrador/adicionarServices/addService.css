@@ -279,3 +279,10 @@ select:focus
   outline: none;
   box-shadow: 0 0 5px rgba(45, 129, 93, 0.3);
 }
+.criarServico {
+  padding: 10px 0;
+  font-size: 16px;
+  color: #444;
+  margin-bottom: 15px;
+  line-height: 1.5;
+}

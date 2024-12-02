@@ -4,7 +4,7 @@ error_reporting(E_ALL);
 header('Content-Type: application/json');
 
 $hostname = "localhost";
-$bancodedados = "clinicaestetica";
+$bancodedados = "harmonybeauty";
 $usuario = "root";
 $senha = "";
 
